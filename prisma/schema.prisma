@@ -11,15 +11,17 @@ model User {
   id       String  @id @default(uuid())
   email    String  @unique
   username String  @unique
-  role     Role    @default(USER)
   imageUrl String?
   password String
+
+  roleId   String
+  role     Role @relation(fields: [roleId], references: [id])
 
   events   Event[]
   comments Comment[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Performance {
@@ -31,7 +33,7 @@ model Performance {
   events Event[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Event {
@@ -44,7 +46,9 @@ model Event {
   organizer   String?
   startedAt   DateTime
   finishedAt  DateTime
-  status      Status
+
+  statusId String
+  status   Status @relation(fields: [statusId], references: [id])
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id])
@@ -67,7 +71,7 @@ model Thread {
   comments Comment[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Comment {
@@ -80,7 +84,7 @@ model Comment {
   thread   Thread @relation(fields: [threadId], references: [id])
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Category {
@@ -88,16 +92,21 @@ model Category {
   name      String   @unique
   event     Event[]
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
-enum Role {
-  USER
-  ADMIN
+model Role {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  user      User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
-enum Status {
-  upcoming
-  ongoing
-  complete
+model Status {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  event     Event[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
