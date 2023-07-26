@@ -1,0 +1,103 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  username String  @unique
+  role     Role    @default(USER)
+  imageUrl String?
+  password String
+
+  events   Event[]
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Performance {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String
+  imageUrl    String?
+
+  events Event[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  name        String
+  imageUrl    String?
+  description String
+  location    String
+  venue       String?
+  organizer   String?
+  startedAt   DateTime
+  finishedAt  DateTime
+  status      Status
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  performanceId String
+  performance   Performance @relation(fields: [performanceId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Thread {
+  id      String @id @default(uuid())
+  title   String
+  content String
+
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Comment {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  threadId String
+  thread   Thread @relation(fields: [threadId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  event     Event[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  upcoming
+  ongoing
+  complete
+}
