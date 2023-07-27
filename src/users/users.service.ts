@@ -30,7 +30,12 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    const user = this.prisma.user.findUnique({ where: { id } });
+    const user = this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        events: true,
+      },
+    });
 
     if (!user) {
       throw new NotFoundException(`User with id: ${id} does not exist.`);

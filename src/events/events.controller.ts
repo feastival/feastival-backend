@@ -21,7 +21,6 @@ export class EventsController {
   @Post()
   @ApiCreatedResponse({ type: EventEntity })
   async create(@Body() createEventDto: CreateEventDto) {
-    console.log('dto', createEventDto);
     const createdEvent = await this.eventsService.create(createEventDto);
     return new EventEntity(createdEvent);
   }
