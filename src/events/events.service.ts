@@ -22,7 +22,7 @@ export class EventsService {
         user: true,
         status: true,
         category: true,
-        artist: true,
+        artists: true,
       },
     });
   }
@@ -35,7 +35,7 @@ export class EventsService {
         user: true,
         status: true,
         category: true,
-        artist: true,
+        artists: true,
       },
     });
   }

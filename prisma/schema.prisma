@@ -15,7 +15,7 @@ model User {
   password String
 
   roleId   String
-  role     Role @relation(fields: [roleId], references: [id])
+  role     Role @relation(fields: [roleId], references: [id], onUpdate: Cascade)
 
   events   Event[]
   comments Comment[]
@@ -47,14 +47,13 @@ model Event {
   startedAt   DateTime
   finishedAt  DateTime
 
+  artists Artist[]
+
   statusId String
-  status   Status @relation(fields: [statusId], references: [id])
+  status   Status @relation(fields: [statusId], references: [id], onUpdate: Cascade)
 
   categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
-
-  artistId String
-  artist   Artist @relation(fields: [artistId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id], onUpdate: Cascade)
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
