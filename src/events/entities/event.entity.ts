@@ -5,40 +5,49 @@ import { UserEntity } from 'src/users/entities/user.entity';
 export class EventEntity {
   @ApiProperty()
   id: string;
+
   @ApiProperty()
   name: string;
+
   @ApiProperty()
   imageUrl?: string;
+
   @ApiProperty()
   description: string;
+
   @ApiProperty()
   location: string;
+
   @ApiProperty()
   venue?: string;
+
   @ApiProperty()
   organizer?: string;
+
   @ApiProperty()
   startedAt: Date;
+
   @ApiProperty()
   finishedAt: Date;
 
   @ApiProperty()
-  statusId?: string;
+  status?: string;
   // @ApiProperty({ type: () => StatusEntity })
   // status: StatusEntity;
 
   @ApiProperty()
-  categoryId?: string;
+  artists?: Array<string>;
+  // @ApiProperty({ type: () => ArtistEntity })
+  // artist: ArtistEntity;
+
+  //@ApiProperty()
+  //categoryId?: string;
   // @ApiProperty({ type: () => CategoryEntity })
   // category: CategoryEntity;
 
   @ApiProperty()
-  artists?: Array<object>;
-  // @ApiProperty({ type: () => ArtistEntity })
-  // artist: ArtistEntity;
-
-  @ApiProperty()
   createdAt: Date;
+
   @ApiProperty()
   updatedAt: Date;
 

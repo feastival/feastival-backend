@@ -27,7 +27,7 @@ model User {
 model Artist {
   id          String  @id @default(uuid())
   name        String  @unique
-  description String
+  description String?
   imageUrl    String?
 
   events Event[]

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -8,39 +8,104 @@ export class EventsService {
   constructor(private prisma: PrismaService) {}
 
   async create(createEventDto: CreateEventDto) {
-    return await this.prisma.event.create({ data: createEventDto });
-  }
+    const statusId = await this.getStatusId(createEventDto.status);
 
-  findAll() {
-    return this.prisma.event.findMany();
-  }
+    const { status, artists, ...eventData } = createEventDto;
 
-  findOne(id: string) {
-    return this.prisma.event.findUnique({
-      where: { id },
-      // include: {
-      //   user: true,
-      //   status: true,
-      //   category: true,
-      //   artist: true,
-      // },
+    return await this.prisma.event.create({
+      data: {
+        ...eventData,
+        statusId: statusId,
+        artists: {
+          connectOrCreate: createEventDto.artists.map((artistName) => ({
+            where: { name: artistName },
+            create: { name: artistName },
+          })),
+        },
+      },
+      include: {
+        status: true,
+        artists: true,
+      },
     });
   }
 
-  update(id: string, updateEventDto: UpdateEventDto) {
-    return this.prisma.event.update({
+  async findAll() {
+    return await this.prisma.event.findMany();
+  }
+
+  async findOne(id: string) {
+    const event = await this.prisma.event.findUnique({
       where: { id },
-      data: updateEventDto,
-      // include: {
-      //   user: true,
-      //   status: true,
-      //   category: true,
-      //   artist: true,
-      // },
+      include: {
+        status: true,
+        artists: true,
+      },
+    });
+
+    if (!event) {
+      throw new NotFoundException(`Event with id: ${id} does not exist.`);
+    }
+
+    return event;
+  }
+
+  async update(id: string, updateEventDto: UpdateEventDto) {
+    const event = await this.prisma.event.findUnique({
+      where: { id },
+    });
+
+    if (!event) {
+      throw new NotFoundException(`Event with id: ${id} does not exist.`);
+    }
+
+    const statusId = await this.getStatusId(updateEventDto.status);
+
+    const { status, artists, ...eventData } = updateEventDto;
+
+    return await this.prisma.event.update({
+      where: { id },
+      data: {
+        ...eventData,
+        statusId: statusId,
+        artists: {
+          connectOrCreate: (updateEventDto.artists || []).map((artistName) => ({
+            where: { name: artistName },
+            create: { name: artistName },
+          })),
+        },
+      },
+      include: {
+        status: true,
+        artists: true,
+      },
     });
   }
 
-  remove(id: string) {
-    return this.prisma.event.delete({ where: { id } });
+  async remove(id: string) {
+    const event = await this.prisma.event.findUnique({
+      where: { id },
+    });
+
+    if (!event) {
+      throw new NotFoundException(`Event with id: ${id} does not exist.`);
+    }
+
+    await this.prisma.event.delete({
+      where: { id },
+    });
+
+    return {};
+  }
+
+  private async getStatusId(statusName: string) {
+    const status = await this.prisma.status.findUnique({
+      where: { name: statusName },
+    });
+
+    if (!status) {
+      throw new Error(`Status "${status}" is not found`);
+    }
+    return status.id;
   }
 }
