@@ -7,8 +7,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class EventsService {
   constructor(private prisma: PrismaService) {}
 
-  create(createEventDto: CreateEventDto) {
-    return this.prisma.event.create({ data: createEventDto });
+  async create(createEventDto: CreateEventDto) {
+    return await this.prisma.event.create({ data: createEventDto });
   }
 
   findAll() {

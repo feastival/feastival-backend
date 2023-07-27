@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -13,6 +21,7 @@ export class EventsController {
   @Post()
   @ApiCreatedResponse({ type: EventEntity })
   async create(@Body() createEventDto: CreateEventDto) {
+    console.log('dto', createEventDto);
     const createdEvent = await this.eventsService.create(createEventDto);
     return new EventEntity(createdEvent);
   }
@@ -33,7 +42,10 @@ export class EventsController {
 
   @Patch(':id')
   @ApiOkResponse({ type: EventEntity })
-  async update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateEventDto: UpdateEventDto,
+  ) {
     const updatedEvent = await this.eventsService.update(id, updateEventDto);
     return new EventEntity(updatedEvent);
   }

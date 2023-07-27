@@ -5,16 +5,20 @@ import { EventEntity } from 'src/events/entities/event.entity';
 export class UserEntity {
   @ApiProperty()
   id: string;
+
   @ApiProperty()
   email: string;
+
   @ApiProperty()
   username: string;
+
   @ApiProperty()
   imageUrl?: string;
+
   @Exclude()
   password: string;
-  
-  @ApiProperty()
+
+  @Exclude()
   roleId?: string;
   // role: RoleEntity;
 

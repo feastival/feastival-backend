@@ -1,19 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+  ConflictException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-
-export const roundsOfHashing = 10;
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
-      roundsOfHashing,
+      parseInt(process.env.BCRYPT_SALT_ROUND),
     );
 
     createUserDto.password = hashedPassword;
@@ -21,26 +25,105 @@ export class UsersService {
     return this.prisma.user.create({ data: createUserDto });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.user.findMany();
   }
 
-  findOne(id: string) {
-    return this.prisma.user.findUnique({ where: { id } });
+  async findOne(id: string) {
+    const user = this.prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(`User with id: ${id} does not exist.`);
+    }
+
+    return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = this.prisma.user.findUnique({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(`User with id: ${id} does not exist.`);
+    }
+
     if (updateUserDto.password) {
       updateUserDto.password = await bcrypt.hash(
         updateUserDto.password,
-        roundsOfHashing,
+        parseInt(process.env.BCRYPT_SALT_ROUND),
       );
     }
 
-    return this.prisma.user.update({ where: { id }, data: updateUserDto });
+    try {
+      const updatedUser = await this.prisma.user.update({
+        where: { id },
+        data: updateUserDto,
+      });
+      return updatedUser;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          throw new ForbiddenException(
+            `The ${error.meta.target} is invalid or already taken`,
+          );
+        }
+      }
+      throw error;
+    }
   }
 
-  remove(id: string) {
+  async remove(id: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with id: ${id} does not exist.`);
+    }
+
     return this.prisma.user.delete({ where: { id } });
+  }
+
+  async trackEvent(userId: string, eventId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        events: true,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with id: ${userId} does not exist.`);
+    }
+
+    const event = await this.prisma.event.findUnique({
+      where: { id: eventId },
+    });
+
+    if (!event) {
+      throw new NotFoundException(`Event with id: ${eventId} does not exist.`);
+    }
+
+    const isEventAlreadyTracked = user.events.some(
+      (event) => event.id === eventId,
+    );
+
+    if (!isEventAlreadyTracked) {
+      const updatedUser = await this.prisma.user.update({
+        where: { id: userId },
+        data: {
+          events: {
+            connect: { id: eventId },
+          },
+        },
+        select: {
+          events: true,
+        },
+      });
+      return updatedUser.events;
+    } else {
+      throw new ConflictException(
+        `Event with id: ${eventId} is already tracked.`,
+      );
+    }
   }
 }
