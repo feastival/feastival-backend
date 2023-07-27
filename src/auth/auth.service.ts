@@ -12,7 +12,7 @@ import { RegisterDto } from './dto/register.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService, private jwtService: JwtService) { }
+  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
   async login(email: string, password: string): Promise<AuthEntity> {
     // Step 1: Fetch a user with the given email
@@ -57,7 +57,10 @@ export class AuthService {
     }
 
     // Hash the password before saving it to the database
-    const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+    const hashedPassword = await bcrypt.hash(
+      registerDto.password,
+      parseInt(process.env.BCRYPT_SALT_ROUND),
+    );
 
     // Create the user in the database
     const newUser = await this.prisma.user.create({
@@ -65,7 +68,13 @@ export class AuthService {
         email: registerDto.email,
         username: registerDto.username,
         password: hashedPassword,
-        roleId: registerDto.roleId,
+        roleId: process.env.PREDEFINED_USER_ROLE_ID,
+      },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        imageUrl: true,
       },
     });
 
@@ -74,6 +83,5 @@ export class AuthService {
 
     // Return the user object along with the accessToken
     return { ...newUser, accessToken };
-
   }
 }
