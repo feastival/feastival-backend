@@ -33,14 +33,9 @@ export class EventEntity {
   // category: CategoryEntity;
 
   @ApiProperty()
-  artistId?: string;
+  artists?: Array<object>;
   // @ApiProperty({ type: () => ArtistEntity })
   // artist: ArtistEntity;
-
-  @ApiProperty()
-  userId?: string;
-  @ApiProperty({ type: () => UserEntity })
-  user?: UserEntity;
 
   @ApiProperty()
   createdAt: Date;
