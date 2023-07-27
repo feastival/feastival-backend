@@ -15,11 +15,11 @@ export class UserEntity {
   password: string;
   
   @ApiProperty()
-  roleId: string;
+  roleId?: string;
   // role: RoleEntity;
 
   @ApiProperty()
-  events: EventEntity[];
+  events?: EventEntity[];
   // comments: CommentEntity;
 
   @ApiProperty()

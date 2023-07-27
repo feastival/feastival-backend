@@ -23,24 +23,24 @@ export class EventEntity {
   finishedAt: Date;
 
   @ApiProperty()
-  statusId: string;
+  statusId?: string;
   // @ApiProperty({ type: () => StatusEntity })
   // status: StatusEntity;
 
   @ApiProperty()
-  categoryId: string;
+  categoryId?: string;
   // @ApiProperty({ type: () => CategoryEntity })
   // category: CategoryEntity;
 
   @ApiProperty()
-  artistId: string;
+  artistId?: string;
   // @ApiProperty({ type: () => ArtistEntity })
   // artist: ArtistEntity;
 
   @ApiProperty()
-  userId: string;
+  userId?: string;
   @ApiProperty({ type: () => UserEntity })
-  user: UserEntity;
+  user?: UserEntity;
 
   @ApiProperty()
   createdAt: Date;

@@ -18,12 +18,12 @@ export class EventsService {
   findOne(id: string) {
     return this.prisma.event.findUnique({
       where: { id },
-      include: {
-        user: true,
-        status: true,
-        category: true,
-        artists: true,
-      },
+      // include: {
+      //   user: true,
+      //   status: true,
+      //   category: true,
+      //   artist: true,
+      // },
     });
   }
 
@@ -31,12 +31,12 @@ export class EventsService {
     return this.prisma.event.update({
       where: { id },
       data: updateEventDto,
-      include: {
-        user: true,
-        status: true,
-        category: true,
-        artists: true,
-      },
+      // include: {
+      //   user: true,
+      //   status: true,
+      //   category: true,
+      //   artist: true,
+      // },
     });
   }
 
