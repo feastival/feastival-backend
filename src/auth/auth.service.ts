@@ -83,6 +83,5 @@ export class AuthService {
 
     // Return the user object along with the accessToken
     return { ...newUser, accessToken };
-
   }
 }
