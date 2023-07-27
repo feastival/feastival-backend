@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
 } from '@nestjs/common';
@@ -39,7 +39,7 @@ export class EventsController {
     return new EventEntity(event);
   }
 
-  @Patch(':id')
+  @Put(':id')
   @ApiOkResponse({ type: EventEntity })
   async update(
     @Param('id') id: string,

@@ -4,8 +4,11 @@ import {
   IsOptional,
   IsDate,
   IsDateString,
+  IsEnum,
+  IsArray,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Status } from './status.enum';
 
 export class CreateEventDto {
   @IsString()
@@ -16,7 +19,7 @@ export class CreateEventDto {
   @IsString()
   @IsOptional()
   @ApiProperty()
-  imageUrl?: string;
+  imageUrl: string;
 
   @IsString()
   @IsNotEmpty()
@@ -31,26 +34,36 @@ export class CreateEventDto {
   @IsString()
   @IsOptional()
   @ApiProperty()
-  venue?: string;
+  venue: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  organizer?: string;
+  organizer: string;
 
-  @ApiProperty()
   @IsDateString()
   @IsNotEmpty()
+  @ApiProperty()
   startedAt: Date;
 
-  @ApiProperty()
   @IsDateString()
   @IsNotEmpty()
+  @ApiProperty()
   finishedAt: Date;
 
+  @IsEnum(Status, { each: true })
   @IsOptional()
-  statusId?: string;
+  @ApiProperty()
+  status: string = 'upcoming';
 
+  @IsArray()
+  @IsString({ each: true })
   @IsOptional()
-  categoryId?: string;
+  @ApiProperty()
+  artists: string[];
+
+  // @IsString()
+  // @IsOptional()
+  // @ApiProperty()
+  // categoryId?: string;
 }
