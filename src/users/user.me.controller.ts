@@ -55,4 +55,13 @@ export class UserMeController {
     const eventId = trackEventDto.eventId;
     return await this.usersService.trackEvent(userId, eventId);
   }
+
+  @Delete('track-event/:id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: UserEntity })
+  async untrackEvent(@Request() req, @Param('id') eventId: string) {
+    const userId = req.user.id;
+    return new UserEntity(await this.usersService.untrackEvent(userId, eventId));
+  }
 }

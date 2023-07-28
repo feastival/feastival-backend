@@ -9,6 +9,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -143,5 +144,19 @@ export class UsersService {
     }
 
     return user.role?.name === 'admin';
+  }
+
+  async untrackEvent(userId: string, eventId: string): Promise<UserEntity> {
+    const updatedUser = await this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        events: {
+          disconnect: [{ id: eventId }],
+        },
+      },
+      include: { events: true },
+    });
+
+    return new UserEntity(updatedUser);
   }
 }
