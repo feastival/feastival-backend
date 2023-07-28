@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class EventsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(createEventDto: CreateEventDto) {
     const statusId = await this.getStatusId(createEventDto.status);
@@ -73,9 +73,8 @@ export class EventsService {
         finishedAt: new Date(updateEventDto.finishedAt),
         statusId: statusId,
         artists: {
-          connectOrCreate: (updateEventDto.artists || []).map((artistName) => ({
-            where: { name: artistName },
-            create: { name: artistName },
+          set: (updateEventDto.artists || []).map((artistName) => ({
+            name: artistName,
           })),
         },
       },
