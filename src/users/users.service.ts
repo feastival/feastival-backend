@@ -131,4 +131,17 @@ export class UsersService {
       );
     }
   }
+
+  async isUserAdmin(userId: string): Promise<boolean> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      include: { role: true },
+    });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user.role?.name === 'admin';
+  }
 }

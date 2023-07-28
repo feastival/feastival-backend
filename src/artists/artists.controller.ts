@@ -15,8 +15,8 @@ import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { ArtistEntity } from './entities/artist.entity';
 
-//import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-//import { AdminGuard } from '../auth/guards/admin.guard';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AdminGuard } from 'src/auth/admin.guard';
 
 import {
   ApiTags,
@@ -31,6 +31,14 @@ import {
 export class ArtistsController {
   constructor(private artistsService: ArtistsService) {}
 
+  @Post()
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: ArtistEntity })
+  async create(@Body() createArtistDto: CreateArtistDto) {
+    return await this.artistsService.create(createArtistDto);
+  }
+
   @Get()
   @ApiQuery({ name: 'q', required: false, type: String })
   @ApiOkResponse({ type: ArtistEntity, isArray: true })
@@ -44,13 +52,9 @@ export class ArtistsController {
     return await this.artistsService.findOne(id);
   }
 
-  @Post()
-  @ApiCreatedResponse({ type: ArtistEntity })
-  async create(@Body() createArtistDto: CreateArtistDto) {
-    return await this.artistsService.create(createArtistDto);
-  }
-
   @Put(':id')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({ type: ArtistEntity })
   async update(
     @Param('id') id: string,
@@ -60,6 +64,8 @@ export class ArtistsController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  @ApiBearerAuth()
   @ApiOkResponse({})
   async remove(@Param('id') id: string) {
     return await this.artistsService.remove(id);
