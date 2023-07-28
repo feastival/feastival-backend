@@ -15,6 +15,8 @@ export class EventsService {
     return await this.prisma.event.create({
       data: {
         ...eventData,
+        startedAt: new Date(createEventDto.startedAt),
+        finishedAt: new Date(createEventDto.finishedAt),
         statusId: statusId,
         artists: {
           connectOrCreate: createEventDto.artists.map((artistName) => ({
@@ -67,6 +69,8 @@ export class EventsService {
       where: { id },
       data: {
         ...eventData,
+        startedAt: new Date(updateEventDto.startedAt),
+        finishedAt: new Date(updateEventDto.finishedAt),
         statusId: statusId,
         artists: {
           connectOrCreate: (updateEventDto.artists || []).map((artistName) => ({
