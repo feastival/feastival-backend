@@ -32,8 +32,20 @@ export class EventsService {
     });
   }
 
-  async findAll() {
-    return await this.prisma.event.findMany();
+  async findAll(name: string) {
+    if (!name) {
+      // Jika input kosong, ambil semua data events
+      return await this.prisma.event.findMany();
+    }
+
+    return await this.prisma.event.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+      },
+    });
   }
 
   async findOne(id: string) {

@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -16,6 +17,7 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
   ApiBearerAuth,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { EventEntity } from './entities/event.entity';
 
@@ -36,10 +38,21 @@ export class EventsController {
     return new EventEntity(createdEvent);
   }
 
+  //@Get()
+  //@ApiOkResponse({ type: EventEntity, isArray: true })
+  //async findAll() {
+  //const events = await this.eventsService.findAll();
+  //return events.map((event) => new EventEntity(event));
+  //}
   @Get()
   @ApiOkResponse({ type: EventEntity, isArray: true })
-  async findAll() {
-    const events = await this.eventsService.findAll();
+  @ApiQuery({
+    name: 'name',
+    required: false,
+    description: 'Search events by name',
+  })
+  async findAll(@Query('name') name?: string) {
+    const events = await this.eventsService.findAll(name);
     return events.map((event) => new EventEntity(event));
   }
 
