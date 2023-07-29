@@ -24,7 +24,7 @@ import { ApiTags, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 @Controller('user/me')
 @ApiTags('user/me')
 export class UserMeController {
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService) { }
 
   @Get()
   @UseGuards(JwtAuthGuard)
@@ -46,13 +46,17 @@ export class UserMeController {
     );
   }
 
-  @Delete(':id')
+  // Modify the route to DELETE user/me directly without any parameter
+  @Delete()
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity })
-  async remove(@Param('id') id: string) {
-    return new UserEntity(await this.usersService.remove(id));
+  async remove(@Request() req) {
+    const userId = req.user.id;
+    const deletedUser = await this.usersService.remove(userId);
+    return new UserEntity(deletedUser);
   }
+
 
   @Post('track-event')
   @UseGuards(JwtAuthGuard)
