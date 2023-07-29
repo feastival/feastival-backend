@@ -46,6 +46,14 @@ export class UserMeController {
     );
   }
 
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: UserEntity })
+  async remove(@Param('id') id: string) {
+    return new UserEntity(await this.usersService.remove(id));
+  }
+
   @Post('track-event')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
