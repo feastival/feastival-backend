@@ -14,8 +14,8 @@ model User {
   imageUrl String?
   password String
 
-  roleId   String?
-  role     Role? @relation(fields: [roleId], references: [id])
+  roleId String?
+  role   Role?   @relation(fields: [roleId], references: [id])
 
   events   Event[]
   comments Comment[]
@@ -37,27 +37,38 @@ model Artist {
 }
 
 model Event {
-  id          String   @id @default(uuid())
+  id          String        @id @default(uuid())
   name        String
   imageUrl    String?
   description String
-  location    String
-  venue       String?
+  location    EventLocation @relation(fields: [locationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  locationId  String
   organizer   String?
   startedAt   DateTime
   finishedAt  DateTime
+  statusId    String?
+  status      Status?       @relation(fields: [statusId], references: [id])
+  artists     Artist[]
+  users       User[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now()) @updatedAt
+}
 
-  statusId String?
-  status   Status? @relation(fields: [statusId], references: [id])
-
-  categoryId String?
-  category   Category? @relation(fields: [categoryId], references: [id])
-
-  artists Artist[]
-  users   User[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+model EventLocation {
+  id            String   @id @default(uuid())
+  event         Event[]
+  venue         String?
+  address       String?
+  mapsURL       String? // https://goo.gl/maps/1xABCDEF123456
+  province      String?
+  city          String?
+  street        String?
+  streetDetails String?
+  postalCode    String?
+  latitude      Decimal? // -90 to 90, Example: -5.1234567
+  longitude     Decimal? // -180 to 180, Example: 105.1234567
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
 }
 
 model Thread {
@@ -80,14 +91,6 @@ model Comment {
   threadId String
   thread   Thread @relation(fields: [threadId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-}
-
-model Category {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  event     Event[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
