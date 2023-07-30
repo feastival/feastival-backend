@@ -68,19 +68,82 @@ export class EventsService {
     };
   }
 
-  async findAll(name: string) {
-    if (!name) {
-      // Jika input kosong, ambil semua data events
-      return await this.prisma.event.findMany();
-    }
+  async findAll(name: string, location: string) {
+    // if (!name) {
+    //   // Jika input kosong, ambil semua data events
+    //   return await this.prisma.event.findMany();
+    // }
 
-    return await this.prisma.event.findMany({
+    const events = await this.prisma.event.findMany({
       where: {
-        name: {
-          contains: name,
-          mode: 'insensitive',
+        AND: [
+          {
+            name: {
+              contains: name,
+              mode: 'insensitive',
+            },
+          },
+          {
+            OR: [
+              {
+                location: {
+                  city: {
+                    contains: location,
+                    mode: 'insensitive',
+                  },
+                },
+              },
+              {
+                location: {
+                  venue: {
+                    contains: location,
+                    mode: 'insensitive',
+                  },
+                },
+              },
+              {
+                location: {
+                  street: {
+                    contains: location,
+                    mode: 'insensitive',
+                  },
+                },
+              },
+              {
+                location: {
+                  address: {
+                    contains: location,
+                    mode: 'insensitive',
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+      include: {
+        status: true,
+        artists: true,
+        genre: true,
+        location: true,
+        organizer: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            role: true,
+          },
         },
       },
+    });
+
+    return events.map((event) => {
+      return {
+        ...event,
+        status: event.status.name,
+        artists: event.artists.map((artist) => artist.name),
+        genre: event.genre.map((genre) => genre.name),
+      };
     });
   }
 

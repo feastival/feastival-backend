@@ -56,8 +56,16 @@ export class EventsController {
     required: false,
     description: 'Search events by name',
   })
-  async findAll(@Query('name') name?: string) {
-    const events = await this.eventsService.findAll(name);
+  @ApiQuery({
+    name: 'location',
+    required: false,
+    description: 'Search events by location',
+  })
+  async findAll(
+    @Query('name') name?: string,
+    @Query('location') location?: string,
+  ) {
+    const events = await this.eventsService.findAll(name, location);
     return events.map((event) => new EventEntity(event));
   }
 
