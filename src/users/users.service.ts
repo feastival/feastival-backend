@@ -34,7 +34,8 @@ export class UsersService {
     const user = this.prisma.user.findUnique({
       where: { id },
       include: {
-        events: true,
+        trackedEvents: true,
+        createdEvents: true,
       },
     });
 
@@ -93,7 +94,7 @@ export class UsersService {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
       include: {
-        events: true,
+        trackedEvents: true,
       },
     });
 
@@ -109,7 +110,7 @@ export class UsersService {
       throw new NotFoundException(`Event with id: ${eventId} does not exist.`);
     }
 
-    const isEventAlreadyTracked = user.events.some(
+    const isEventAlreadyTracked = user.trackedEvents.some(
       (event) => event.id === eventId,
     );
 
@@ -117,15 +118,16 @@ export class UsersService {
       const updatedUser = await this.prisma.user.update({
         where: { id: userId },
         data: {
-          events: {
+          trackedEvents: {
             connect: { id: eventId },
           },
         },
         select: {
-          events: true,
+          trackedEvents: true,
+          createdEvents: true,
         },
       });
-      return updatedUser.events;
+      return updatedUser;
     } else {
       throw new ConflictException(
         `Event with id: ${eventId} is already tracked.`,
@@ -133,28 +135,15 @@ export class UsersService {
     }
   }
 
-  async isUserAdmin(userId: string): Promise<boolean> {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-      include: { role: true },
-    });
-
-    if (!user) {
-      throw new Error('User not found');
-    }
-
-    return user.role?.name === 'admin';
-  }
-
   async untrackEvent(userId: string, eventId: string): Promise<UserEntity> {
     const updatedUser = await this.prisma.user.update({
       where: { id: userId },
       data: {
-        events: {
+        trackedEvents: {
           disconnect: [{ id: eventId }],
         },
       },
-      include: { events: true },
+      include: { trackedEvents: true },
     });
 
     return new UserEntity(updatedUser);

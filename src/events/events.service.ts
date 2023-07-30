@@ -5,31 +5,66 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class EventsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
-  async create(createEventDto: CreateEventDto) {
+  async create(organizerId: string, createEventDto: CreateEventDto) {
     const statusId = await this.getStatusId(createEventDto.status);
 
-    const { status, artists, ...eventData } = createEventDto;
+    //const { status, artists, genre, ...eventData } = createEventDto;
 
-    return await this.prisma.event.create({
+    const newEvent = await this.prisma.event.create({
       data: {
-        ...eventData,
-        startedAt: new Date(createEventDto.startedAt),
-        finishedAt: new Date(createEventDto.finishedAt),
-        statusId: statusId,
+        name: createEventDto.name,
+        imageUrl: createEventDto.imageUrl,
+        description: createEventDto.description,
+        startedAt: createEventDto.startedAt
+          ? new Date(createEventDto.startedAt)
+          : null,
+        finishedAt: createEventDto.finishedAt
+          ? new Date(createEventDto.finishedAt)
+          : null,
+        status: { connect: { id: statusId } },
+        organizer: { connect: { id: organizerId } },
         artists: {
-          connectOrCreate: createEventDto.artists.map((artistName) => ({
+          connectOrCreate: createEventDto.artists?.map((artistName) => ({
             where: { name: artistName },
             create: { name: artistName },
           })),
         },
+        genre: {
+          connectOrCreate: createEventDto.genre?.map((genreName) => ({
+            where: { name: genreName },
+            create: { name: genreName },
+          })),
+        },
+        location: createEventDto.location
+          ? {
+              create: createEventDto.location,
+            }
+          : { create: {} },
       },
       include: {
         status: true,
         artists: true,
+        genre: true,
+        location: true,
+        organizer: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            role: true,
+          },
+        },
       },
     });
+
+    return {
+      ...newEvent,
+      status: newEvent.status.name,
+      artists: newEvent.artists.map((artist) => artist.name),
+      genre: newEvent.genre.map((genre) => genre.name),
+    };
   }
 
   async findAll(name: string) {
@@ -54,6 +89,16 @@ export class EventsService {
       include: {
         status: true,
         artists: true,
+        genre: true,
+        location: true,
+        organizer: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            role: true,
+          },
+        },
       },
     });
 
@@ -61,40 +106,97 @@ export class EventsService {
       throw new NotFoundException(`Event with id: ${id} does not exist.`);
     }
 
-    return event;
+    return {
+      ...event,
+      status: event.status.name,
+      artists: event.artists.map((artist) => artist.name),
+      genre: event.genre.map((genre) => genre.name),
+    };
   }
 
-  async update(id: string, updateEventDto: UpdateEventDto) {
+  async update(
+    organizerId: string,
+    eventId: string,
+    updateEventDto: UpdateEventDto,
+  ) {
     const event = await this.prisma.event.findUnique({
-      where: { id },
+      where: { id: eventId },
     });
 
     if (!event) {
-      throw new NotFoundException(`Event with id: ${id} does not exist.`);
+      throw new NotFoundException(`Event with id: ${eventId} does not exist.`);
     }
 
-    const statusId = await this.getStatusId(updateEventDto.status);
+    const statusId = updateEventDto.status
+      ? await this.getStatusId(updateEventDto.status)
+      : undefined;
 
     const { status, artists, ...eventData } = updateEventDto;
 
-    return await this.prisma.event.update({
-      where: { id },
+    let updateArtists = {};
+    if (updateEventDto.genre?.length !== 0) {
+      updateArtists = {
+        set: [],
+        connectOrCreate: updateEventDto.artists?.map((artistName) => ({
+          where: { name: artistName },
+          create: { name: artistName },
+        })),
+      };
+    }
+
+    let updateGenre = {};
+    if (updateEventDto.genre?.length !== 0) {
+      updateGenre = {
+        set: [],
+        connectOrCreate: updateEventDto.genre?.map((genreName) => ({
+          where: { name: genreName },
+          create: { name: genreName },
+        })),
+      };
+    }
+
+    const updatedEvent = await this.prisma.event.update({
+      where: { id: eventId },
       data: {
-        ...eventData,
-        startedAt: new Date(updateEventDto.startedAt),
-        finishedAt: new Date(updateEventDto.finishedAt),
-        statusId: statusId,
-        artists: {
-          set: (updateEventDto.artists || []).map((artistName) => ({
-            name: artistName,
-          })),
+        name: updateEventDto.name,
+        imageUrl: updateEventDto.imageUrl,
+        description: updateEventDto.description,
+        startedAt: updateEventDto.startedAt
+          ? new Date(updateEventDto.startedAt)
+          : null,
+        finishedAt: updateEventDto.finishedAt
+          ? new Date(updateEventDto.finishedAt)
+          : null,
+        status: statusId ? { connect: { id: statusId } } : {},
+        //organizer: { connect: { id: organizerId } },
+        artists: updateArtists,
+        genre: updateGenre,
+        location: {
+          update: updateEventDto.location,
         },
       },
       include: {
         status: true,
         artists: true,
+        genre: true,
+        location: true,
+        organizer: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+            role: true,
+          },
+        },
       },
     });
+
+    return {
+      ...updatedEvent,
+      status: updatedEvent.status.name,
+      artists: updatedEvent.artists.map((artist) => artist.name),
+      genre: updatedEvent.genre.map((genre) => genre.name),
+    };
   }
 
   async remove(id: string) {

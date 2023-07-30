@@ -1,6 +1,7 @@
 import { Event } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserEntity } from 'src/users/entities/user.entity';
+import { Exclude } from 'class-transformer';
 
 export class EventEntity {
   @ApiProperty()
@@ -13,16 +14,7 @@ export class EventEntity {
   imageUrl?: string;
 
   @ApiProperty()
-  description: string;
-
-  @ApiProperty()
-  location: string;
-
-  @ApiProperty()
-  venue?: string;
-
-  @ApiProperty()
-  organizer?: string;
+  description?: string;
 
   @ApiProperty()
   startedAt: Date;
@@ -32,18 +24,18 @@ export class EventEntity {
 
   @ApiProperty()
   status?: string;
-  // @ApiProperty({ type: () => StatusEntity })
-  // status: StatusEntity;
+
+  @ApiProperty()
+  genre?: Array<string>;
 
   @ApiProperty()
   artists?: Array<string>;
-  // @ApiProperty({ type: () => ArtistEntity })
-  // artist: ArtistEntity;
 
-  //@ApiProperty()
-  //categoryId?: string;
-  // @ApiProperty({ type: () => CategoryEntity })
-  // category: CategoryEntity;
+  @ApiProperty()
+  location: Object;
+
+  @ApiProperty()
+  organizer: Object;
 
   @ApiProperty()
   createdAt: Date;
@@ -51,7 +43,16 @@ export class EventEntity {
   @ApiProperty()
   updatedAt: Date;
 
-  constructor(partial: Partial<Event>) {
+  @Exclude()
+  organizerId: String;
+
+  @Exclude()
+  statusId: String;
+
+  @Exclude()
+  locationId: String;
+
+  constructor(partial: Partial<EventEntity>) {
     Object.assign(this, partial);
   }
 }

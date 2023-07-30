@@ -24,7 +24,7 @@ import { ApiTags, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 @Controller('user/me')
 @ApiTags('user/me')
 export class UserMeController {
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService) {}
 
   @Get()
   @UseGuards(JwtAuthGuard)
@@ -57,7 +57,6 @@ export class UserMeController {
     return new UserEntity(deletedUser);
   }
 
-
   @Post('track-event')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
@@ -74,6 +73,8 @@ export class UserMeController {
   @ApiOkResponse({ type: UserEntity })
   async untrackEvent(@Request() req, @Param('id') eventId: string) {
     const userId = req.user.id;
-    return new UserEntity(await this.usersService.untrackEvent(userId, eventId));
+    return new UserEntity(
+      await this.usersService.untrackEvent(userId, eventId),
+    );
   }
 }

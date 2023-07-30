@@ -6,55 +6,49 @@ import {
   IsDateString,
   IsEnum,
   IsArray,
+  ValidateNested,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { Status } from './status.enum';
+import { LocationDTO } from './location.dto';
 
 export class UpdateEventDto {
   @IsString()
   @IsOptional()
   @ApiProperty()
-  name: string;
+  name?: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  imageUrl: string;
+  imageUrl?: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  description: string;
-
-  @IsString()
-  @IsOptional()
-  @ApiProperty()
-  location: string;
-
-  @IsString()
-  @IsOptional()
-  @ApiProperty()
-  venue: string;
-
-  @IsString()
-  @IsOptional()
-  @ApiProperty()
-  organizer: string;
+  description?: string;
 
   @IsDateString()
   @IsOptional()
   @ApiProperty()
-  startedAt: Date;
+  startedAt?: Date;
 
   @IsDateString()
   @IsOptional()
   @ApiProperty()
-  finishedAt: Date;
+  finishedAt?: Date;
 
   @IsEnum(Status, { each: true })
   @IsOptional()
   @ApiProperty()
-  status: string;
+  status?: string;
+
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  @ApiProperty()
+  genre: string[];
 
   @IsArray()
   @IsString({ each: true })
@@ -62,8 +56,8 @@ export class UpdateEventDto {
   @ApiProperty()
   artists: string[];
 
-  @IsString()
-  @IsOptional()
+  @ValidateNested()
   @ApiProperty()
-  categoryId: string;
+  @Type(() => LocationDTO)
+  location: LocationDTO;
 }
