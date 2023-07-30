@@ -1,6 +1,10 @@
 import {
   IsNotEmpty,
   IsString,
+  IsNumber,
+  IsInt,
+  Min,
+  Max,
   IsOptional,
   IsDate,
   IsDateString,
@@ -38,6 +42,13 @@ export class CreateEventDto {
   @IsOptional()
   @ApiProperty()
   finishedAt?: Date;
+
+  @IsInt()
+  @Min(0)
+  @Max(999_999_999)
+  @IsOptional()
+  @ApiProperty()
+  price?: number;
 
   @IsEnum(Status, { each: true })
   @IsOptional()

@@ -23,6 +23,10 @@ export class UserEntity {
   // role: RoleEntity;
 
   @ApiProperty()
+  role?: string;
+  // role: RoleEntity;
+
+  @ApiProperty()
   events?: EventEntity[];
   // comments: CommentEntity;
 

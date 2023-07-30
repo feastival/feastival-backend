@@ -26,6 +26,15 @@ import { AdminGuard } from 'src/auth/admin.guard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @Post()
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: UserEntity })
+  async create(@Body() createUserDto: CreateUserDto) {
+    const createdUser = await this.usersService.create(createUserDto);
+    return new UserEntity(createdUser);
+  }
+
   @Get()
   @UseGuards(JwtAuthGuard, AdminGuard)
   @ApiBearerAuth()

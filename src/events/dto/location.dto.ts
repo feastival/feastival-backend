@@ -57,11 +57,13 @@ export class LocationDTO {
   @Min(-90)
   @Max(90)
   @IsOptional()
+  @ApiProperty()
   latitude?: number;
 
   @IsNumber()
   @Min(-180)
   @Max(180)
   @IsOptional()
+  @ApiProperty()
   longitude?: number;
 }

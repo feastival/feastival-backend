@@ -23,6 +23,9 @@ export class EventEntity {
   finishedAt: Date;
 
   @ApiProperty()
+  price?: number;
+
+  @ApiProperty()
   status?: string;
 
   @ApiProperty()

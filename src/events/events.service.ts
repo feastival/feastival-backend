@@ -17,6 +17,7 @@ export class EventsService {
         name: createEventDto.name,
         imageUrl: createEventDto.imageUrl,
         description: createEventDto.description,
+        price: createEventDto.price,
         startedAt: createEventDto.startedAt
           ? new Date(createEventDto.startedAt)
           : null,
@@ -161,6 +162,7 @@ export class EventsService {
         name: updateEventDto.name,
         imageUrl: updateEventDto.imageUrl,
         description: updateEventDto.description,
+        price: updateEventDto.price,
         startedAt: updateEventDto.startedAt
           ? new Date(updateEventDto.startedAt)
           : null,

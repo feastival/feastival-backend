@@ -45,6 +45,7 @@ model Event {
   description String?
   startedAt   DateTime?
   finishedAt  DateTime?
+  price       Int?
 
   statusId String
   status   Status @relation(fields: [statusId], references: [id], onUpdate: Cascade)

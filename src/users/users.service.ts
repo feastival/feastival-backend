@@ -16,14 +16,58 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
+    // const hashedPassword = await bcrypt.hash(
+    //   createUserDto.password,
+    //   parseInt(process.env.BCRYPT_SALT_ROUND),
+    // );
+
+    // createUserDto.password = hashedPassword;
+
+    // return this.prisma.user.create({ data: createUserDto });
+
+    // Check if a user with the given email already exists
+    const existingUserByEmail = await this.prisma.user.findUnique({
+      where: { email: createUserDto.email },
+    });
+
+    if (existingUserByEmail) {
+      throw new ConflictException('User with this email already exists');
+    }
+
+    // Check if a user with the given username already exists
+    const existingUserByUsername = await this.prisma.user.findUnique({
+      where: { username: createUserDto.username },
+    });
+
+    if (existingUserByUsername) {
+      throw new ConflictException('Username is already taken');
+    }
+
+    // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
       parseInt(process.env.BCRYPT_SALT_ROUND),
     );
 
-    createUserDto.password = hashedPassword;
+    const roleId = await this.getRoleId(createUserDto.role);
 
-    return this.prisma.user.create({ data: createUserDto });
+    // Create the user in the database
+    const newUser = await this.prisma.user.create({
+      data: {
+        email: createUserDto.email,
+        username: createUserDto.username,
+        password: hashedPassword,
+        roleId: roleId, //process.env.PREDEFINED_USER_ROLE_ID,
+      },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        imageUrl: true,
+      },
+    });
+
+    return newUser;
   }
 
   async findAll() {
@@ -31,11 +75,12 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    const user = this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { id },
       include: {
         trackedEvents: true,
         createdEvents: true,
+        role: true,
       },
     });
 
@@ -43,11 +88,11 @@ export class UsersService {
       throw new NotFoundException(`User with id: ${id} does not exist.`);
     }
 
-    return user;
+    return { ...user, role: user.role.name };
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    const user = this.prisma.user.findUnique({ where: { id } });
+    const user = await this.prisma.user.findUnique({ where: { id } });
 
     if (!user) {
       throw new NotFoundException(`User with id: ${id} does not exist.`);
@@ -147,5 +192,16 @@ export class UsersService {
     });
 
     return new UserEntity(updatedUser);
+  }
+
+  private async getRoleId(roleName: string) {
+    const role = await this.prisma.role.findUnique({
+      where: { name: roleName },
+    });
+
+    if (!role) {
+      throw new Error(`Status "${role}" is not found`);
+    }
+    return role.id;
   }
 }
