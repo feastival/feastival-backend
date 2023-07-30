@@ -30,6 +30,6 @@ export class AdminGuard implements CanActivate {
       throw new Error('User not found');
     }
 
-    return user.role?.name === 'admin';
+    return user.role?.name === 'admin' || user.role?.name === 'organizer';
   }
 }

@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  Request,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -33,8 +34,12 @@ export class EventsController {
   @UseGuards(JwtAuthGuard, AdminGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: EventEntity })
-  async create(@Body() createEventDto: CreateEventDto) {
-    const createdEvent = await this.eventsService.create(createEventDto);
+  async create(@Request() req, @Body() createEventDto: CreateEventDto) {
+    const organizerId = req.user.id;
+    const createdEvent = await this.eventsService.create(
+      organizerId,
+      createEventDto,
+    );
     return new EventEntity(createdEvent);
   }
 
@@ -68,19 +73,25 @@ export class EventsController {
   @ApiBearerAuth()
   @ApiOkResponse({ type: EventEntity })
   async update(
-    @Param('id') id: string,
+    @Request() req,
+    @Param('id') eventId: string,
     @Body() updateEventDto: UpdateEventDto,
   ) {
-    const updatedEvent = await this.eventsService.update(id, updateEventDto);
+    const organizerId = req.user.id;
+    const updatedEvent = await this.eventsService.update(
+      organizerId,
+      eventId,
+      updateEventDto,
+    );
     return new EventEntity(updatedEvent);
   }
 
-  @Delete(':id')
-  @UseGuards(JwtAuthGuard, AdminGuard)
-  @ApiBearerAuth()
-  @ApiOkResponse({ type: EventEntity })
-  async remove(@Param('id') id: string) {
-    const deletedEvent = await this.eventsService.remove(id);
-    return new EventEntity(deletedEvent);
-  }
+  // @Delete(':id')
+  // @UseGuards(JwtAuthGuard, AdminGuard)
+  // @ApiBearerAuth()
+  // @ApiOkResponse({ type: EventEntity })
+  // async remove(@Param('id') id: string) {
+  //   const deletedEvent = await this.eventsService.remove(id);
+  //   return new EventEntity(deletedEvent);
+  // }
 }

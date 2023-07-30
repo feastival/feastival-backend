@@ -6,9 +6,12 @@ import {
   IsDateString,
   IsEnum,
   IsArray,
+  ValidateNested,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { Status } from './status.enum';
+import { LocationDTO } from './location.dto';
 
 export class CreateEventDto {
   @IsString()
@@ -19,42 +22,33 @@ export class CreateEventDto {
   @IsString()
   @IsOptional()
   @ApiProperty()
-  imageUrl: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  description: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  location: string;
+  imageUrl?: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  venue: string;
+  description?: string;
 
-  @IsString()
+  @IsDateString()
   @IsOptional()
   @ApiProperty()
-  organizer: string;
+  startedAt?: Date;
 
   @IsDateString()
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
-  startedAt: Date;
-
-  @IsDateString()
-  @IsNotEmpty()
-  @ApiProperty()
-  finishedAt: Date;
+  finishedAt?: Date;
 
   @IsEnum(Status, { each: true })
   @IsOptional()
   @ApiProperty()
-  status: string = 'upcoming';
+  status?: string = 'upcoming';
+
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  @ApiProperty()
+  genre: string[];
 
   @IsArray()
   @IsString({ each: true })
@@ -62,8 +56,8 @@ export class CreateEventDto {
   @ApiProperty()
   artists: string[];
 
-  // @IsString()
-  // @IsOptional()
-  // @ApiProperty()
-  // categoryId?: string;
+  @ValidateNested()
+  @ApiProperty()
+  @Type(() => LocationDTO)
+  location: LocationDTO;
 }

@@ -62,13 +62,15 @@ export class AuthService {
       parseInt(process.env.BCRYPT_SALT_ROUND),
     );
 
+    const roleId = await this.getRoleId('user');
+
     // Create the user in the database
     const newUser = await this.prisma.user.create({
       data: {
         email: registerDto.email,
         username: registerDto.username,
         password: hashedPassword,
-        roleId: process.env.PREDEFINED_USER_ROLE_ID,
+        roleId: roleId, //process.env.PREDEFINED_USER_ROLE_ID,
       },
       select: {
         id: true,
@@ -83,5 +85,16 @@ export class AuthService {
 
     // Return the user object along with the accessToken
     return { ...newUser, accessToken };
+  }
+
+  private async getRoleId(roleName: string) {
+    const role = await this.prisma.role.findUnique({
+      where: { name: roleName },
+    });
+
+    if (!role) {
+      throw new Error(`Status "${role}" is not found`);
+    }
+    return role.id;
   }
 }
