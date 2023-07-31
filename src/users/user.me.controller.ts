@@ -9,6 +9,7 @@ import {
   Param,
   Query,
   UseGuards,
+  Patch,
 } from '@nestjs/common';
 
 import { UsersService } from './users.service';
@@ -20,6 +21,7 @@ import { EventEntity } from '../events/entities/event.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 import { ApiTags, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
+import { UpdatePartialUserDto } from './dto/update-user-partial.dto';
 
 @Controller('user/me')
 @ApiTags('user/me')
@@ -34,6 +36,24 @@ export class UserMeController {
     const userId = req.user.id;
     return new UserEntity(await this.usersService.findOne(userId));
   }
+  
+  @Patch()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: UserEntity })
+  async updatePartial(@Request() req, @Body() updatePartialUserDto: UpdatePartialUserDto) {
+    const userId = req.user.id;
+    // Convert UpdatePartialUserDto to UpdateUserDto
+    const updateUserDto: UpdateUserDto = {
+      username: updatePartialUserDto.username,
+      email: updatePartialUserDto.email,
+      password: updatePartialUserDto.password,
+      imageUrl: updatePartialUserDto.imageUrl,
+    };
+    return new UserEntity(
+      await this.usersService.update(userId, updateUserDto))
+    ;
+  }
 
   @Put()
   @UseGuards(JwtAuthGuard)
@@ -45,6 +65,7 @@ export class UserMeController {
       await this.usersService.update(userId, updateUserDto),
     );
   }
+
 
   // Modify the route to DELETE user/me directly without any parameter
   @Delete()

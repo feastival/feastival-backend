@@ -25,6 +25,7 @@ import {
   ApiOkResponse,
   ApiCreatedResponse,
 } from '@nestjs/swagger';
+import { OrganizerGuard } from 'src/auth/organizer.guard';
 
 @Controller('artists')
 @ApiTags('artists')
@@ -32,7 +33,7 @@ export class ArtistsController {
   constructor(private artistsService: ArtistsService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard, OrganizerGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ArtistEntity })
   async create(@Body() createArtistDto: CreateArtistDto) {
@@ -53,7 +54,7 @@ export class ArtistsController {
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard, OrganizerGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: ArtistEntity })
   async update(
