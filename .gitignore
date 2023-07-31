@@ -17,6 +17,9 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
+/prisma/databaru.json
+/prisma/databaru-tiket.json
+/prisma/test-copy.json
 
 # IDEs and editors
 /.idea
