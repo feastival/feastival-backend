@@ -10,6 +10,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { UserEntity } from './entities/user.entity';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { UpdatePartialUserDto } from './dto/update-user-partial.dto';
 
 @Injectable()
 export class UsersService {
@@ -113,6 +115,39 @@ export class UsersService {
       return updatedUser;
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          throw new ForbiddenException(
+            `The ${error.meta.target} is invalid or already taken`,
+          );
+        }
+      }
+      throw error;
+    }
+  }
+
+  async updatePartial(id: string, updatePartialUserDto: UpdatePartialUserDto): Promise<UserEntity> {
+    // Fetch the user to check if it exists
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with id: ${id} does not exist.`);
+    }
+
+    if (updatePartialUserDto.password) {
+      updatePartialUserDto.password = await bcrypt.hash(
+        updatePartialUserDto.password,
+        parseInt(process.env.BCRYPT_SALT_ROUND),
+      );
+    }
+
+    try {
+      const updatedUser = await this.prisma.user.update({
+        where: { id },
+        data: updatePartialUserDto,
+      });
+      return new UserEntity(updatedUser);
+    } catch (error) {
+      // Handle known Prisma error codes
+      if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
           throw new ForbiddenException(
             `The ${error.meta.target} is invalid or already taken`,

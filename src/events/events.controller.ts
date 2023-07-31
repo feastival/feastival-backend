@@ -24,6 +24,7 @@ import { EventEntity } from './entities/event.entity';
 
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AdminGuard } from 'src/auth/admin.guard';
+import { OrganizerGuard } from 'src/auth/organizer.guard';
 
 @Controller('events')
 @ApiTags('events')
@@ -31,7 +32,7 @@ export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard, OrganizerGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: EventEntity })
   async create(@Request() req, @Body() createEventDto: CreateEventDto) {
@@ -77,7 +78,7 @@ export class EventsController {
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard, OrganizerGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: EventEntity })
   async update(
