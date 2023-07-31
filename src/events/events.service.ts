@@ -68,7 +68,7 @@ export class EventsService {
     };
   }
 
-  async findAll(name: string, location: string) {
+  async findAll(name: string, location: string, status: string) {
     // if (!name) {
     //   // Jika input kosong, ambil semua data events
     //   return await this.prisma.event.findMany();
@@ -119,8 +119,20 @@ export class EventsService {
               },
             ],
           },
+          status // New filtering condition based on the status field
+            ? {
+                status: {
+                  name: {
+                    equals: status,
+                    mode: 'insensitive',
+                  },
+                },
+              }
+            : {},
         ],
+        
       },
+      
       include: {
         status: true,
         artists: true,
