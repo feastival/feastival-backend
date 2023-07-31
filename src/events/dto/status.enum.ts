@@ -1,5 +1,5 @@
 export enum Status {
-  upcoming = 'upcoming',
-  ongoing = 'ongoing',
-  finished = 'finished',
+  upcoming = 'Upcoming',
+  ongoing = 'Ongoing',
+  finished = 'Finished',
 }
