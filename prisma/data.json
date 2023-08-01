@@ -61,7 +61,13 @@
     "price": 89900,
     "status": "Finished",
     "genre": ["Indie"],
-    "artists": ["Black Horses", "Det-Plag Lust","The Jansen","Rachun","Tabraklari"],
+    "artists": [
+      "Black Horses",
+      "Det-Plag Lust",
+      "The Jansen",
+      "Rachun",
+      "Tabraklari"
+    ],
     "organizer": "Gelombang Maju Jaya",
     "location": {
       "venue": "Kira Coffee Space",
@@ -71,14 +77,14 @@
       "city": "Bekasi",
       "street": " ",
       "postalCode": "10330",
-      "latitude": -6.251620,
-      "longitude": 107.091190
+      "latitude": -6.25162,
+      "longitude": 107.09119
     }
   },
   {
     "name": "Rhytm Of Love",
     "imageUrl": "https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20230515120302_6461bd0649c76.jpg",
-    "description": "Join us for an extraordinary evening filled with love and joy at the \"Rhythm of Love\" concert. This enchanting event will take place at Bengkel SCBD, starting at 9pm. Prepare to be serenaded by the sensational voices of Yura Yunita and the celebrated duo, Yovie and Nuno.\n\nImmerse yourself in a night of captivating melodies, soulful performances, and heartfelt lyrics that will touch your heart. The concert promises to create an unforgettable atmosphere, where love and music intertwine to create pure bliss.\n\nAs the clock strikes 9pm, the stage will come alive with the enchanting performances of these renowned artists. Yura Yunita, known for her soulful voice and heartfelt ballads, will captivate you with her emotive renditions. Yovie and Nuno, a duo synonymous with romantic hits, will serenade you with their timeless classics.\n\nBengkel SCBD, renowned for its state-of-the-art facilities and exceptional acoustics, will provide the perfect setting for this magical evening. Its intimate ambiance and carefully curated atmosphere will enhance your concert experience, allowing you to fully immerse yourself in the music.\n\nCome and be part of this extraordinary celebration of love and joy. Grab your tickets now and get ready to indulge in an unforgettable night of soul-stirring performances at the \"Rhythm of Love\" concert with Yura Yunita and Yovie and Nuno.",    
+    "description": "Join us for an extraordinary evening filled with love and joy at the \"Rhythm of Love\" concert. This enchanting event will take place at Bengkel SCBD, starting at 9pm. Prepare to be serenaded by the sensational voices of Yura Yunita and the celebrated duo, Yovie and Nuno.\n\nImmerse yourself in a night of captivating melodies, soulful performances, and heartfelt lyrics that will touch your heart. The concert promises to create an unforgettable atmosphere, where love and music intertwine to create pure bliss.\n\nAs the clock strikes 9pm, the stage will come alive with the enchanting performances of these renowned artists. Yura Yunita, known for her soulful voice and heartfelt ballads, will captivate you with her emotive renditions. Yovie and Nuno, a duo synonymous with romantic hits, will serenade you with their timeless classics.\n\nBengkel SCBD, renowned for its state-of-the-art facilities and exceptional acoustics, will provide the perfect setting for this magical evening. Its intimate ambiance and carefully curated atmosphere will enhance your concert experience, allowing you to fully immerse yourself in the music.\n\nCome and be part of this extraordinary celebration of love and joy. Grab your tickets now and get ready to indulge in an unforgettable night of soul-stirring performances at the \"Rhythm of Love\" concert with Yura Yunita and Yovie and Nuno.",
     "startedAt": "2023-08-02T12:00:00.000Z",
     "finishedAt": "2023-08-02T15:00:00.000Z",
     "price": 199000,
@@ -94,8 +100,8 @@
       "city": "Jakarta Selatan",
       "street": " ",
       "postalCode": "12190",
-      "latitude": -6.226610,
-      "longitude": 106.808940
+      "latitude": -6.22661,
+      "longitude": 106.80894
     }
   },
   {
@@ -130,7 +136,13 @@
     "price": 1125000,
     "status": "Upcoming",
     "genre": ["EDM", "Electronic"],
-    "artists": ["Afrojack", "Alesso","DJ Raiden", "Ares Carter", "and many more"],
+    "artists": [
+      "Afrojack",
+      "Alesso",
+      "DJ Raiden",
+      "Ares Carter",
+      "and many more"
+    ],
     "organizer": "Ultra Bali",
     "location": {
       "venue": "Locca Sea House",
@@ -188,6 +200,316 @@
       "postalCode": "70241",
       "latitude": -3.3265815346277834,
       "longitude": 114.59585326855806
+    }
+  },
+  {
+    "name": "The Great Journey of Noah - Bandung",
+    "imageUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/07/14/c8d40ce9-a4ec-480a-84fc-edfa60c65978-1689330315646-dd41382f09492ddefc99bc5f8dcae846.jpg",
+    "description": "Satu dekade perjalanan sudah dilalui.\n\nPenuh kisah lahirkan mimpi penuh arti.\n\nMemberikan inspirasi pada setiap karya.\n\nKembali NOAH akan menggebrak panggung musik Indonesia dengan sebuah konser bertajuk 'The Great Journey of NOAH'.\n\nKonser special show berdurasi 3 jam ini menceritakan tentang perjalanan musik NOAH dengan konsep pertunjukan musik yang benar - benar baru dengan dukungan penampilan visual dan lighting yang terpadu. Di mana sebagai titik awal, NOAH berhasil menggebrak kota Makassar di akhir tahun 2022, Medan di Maret 2023, Surabaya di Mei 2023 dan di lanjutkan menuju kota-kota besar lainnya, dan Bandung sebagai salah satunya.",
+    "startedAt": "2023-09-16T13:00:00.000Z",
+    "finishedAt": "2023-09-16T15:00:00.000Z",
+    "price": 400000,
+    "status": "Upcoming",
+    "genre": ["Pop", "Ballad", "Pop Rock"],
+    "artists": ["Noah"],
+    "organizer": "Aloka",
+    "location": {
+      "venue": "El Dorado Dome",
+      "address": "Jl. Dr. Setiabudi No.438, Gudangkahuripan, Kec. Lembang, Kota Bandung, Jawa Barat",
+      "mapsURL": "https://goo.gl/maps/3DyKRGgHrNq331ZA7",
+      "province": "Jawa Barat",
+      "city": "Bandung",
+      "street": " ",
+      "postalCode": "40154",
+      "latitude": -6.840845103681136,
+      "longitude": 107.59863975879243
+    }
+  },
+  {
+    "name": "RONAN KEATING LIVE IN INDONESIA 2023 CONCERT",
+    "imageUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/07/06/7a8164ba-a0e4-48fb-9d25-ce9f124dddd3-1688614193210-3a88cd48afa9fe3278efc3c818902505.jpeg",
+    "description": "Saksikan langsung penampilan Ronan Keating lewat 'RONAN KEATING LIVE IN INDONESIA 2023 CONCERT' yang akan membawakan lagu-lagu hits dari Ronan dan Boyzone! Konser juga akan dimeriahkan oleh bintang tamu, Putri Ariani!\n\nBeli tiketnya di tiket.com sekarang!",
+    "startedAt": "2023-08-18T11:30:00.000Z",
+    "finishedAt": "2023-08-18T13:30:00.000Z",
+    "price": 720000,
+    "status": "Upcoming",
+    "genre": ["Pop", "Ballad"],
+    "artists": ["Ronan Keating", "Putri Ariani"],
+    "organizer": "Warna Warni Entertainment",
+    "location": {
+      "venue": "Hotel Pullman Jakarta",
+      "address": "Jl. M.H. Thamrin No.59, Gondangdia, Kec. Menteng, Jakarta Pusat, Daerah Khusus Ibukota Jakarta",
+      "mapsURL": "https://goo.gl/maps/bVaAad21erNZ4cT27",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Pusat",
+      "street": " ",
+      "postalCode": "10350",
+      "latitude": -6.192905903086678,
+      "longitude": 106.8237685233454
+    }
+  },
+  {
+    "name": "SEMARAK DJIWA TANGGUH",
+    "imageUrl": "https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20230731190740_64c7a40cdbf4c.jpg",
+    "description": "Acara musik yang bertajuk “Semarak Djiwa Tangguh” akan segera dihelat pada tanggal 30 Juli 2023 mulai pukul 16:00 hingga 23:00 WIB. Acara ini akan berlangsung di Lapangan Yonif 312, Jalan Raya Sadang Dangdeur, Subang, Jawa Barat. Semarak Djiwa Tangguh dihadirkan sebagai wujud apresiasi bagi para pecinta musik Tanah Air yang selama ini mendukung industri musik Indonesia. Dengan menghadirkan deretan musisi ternama, diharapkan acara ini mampu mempersembahkan hiburan berkualitas dan menyajikan momen tak terlupakan bagi para penonton. Untuk informasi lebih lanjut mengenai acara ini, Anda dapat mengunjungi akun media sosial @djiwa_Tangguh yang akan memberikan update terkini dan menarik seputar acara “Semarak Djiwa Tangguh”.",
+    "startedAt": "2023-08-05T09:00:00.000Z",
+    "finishedAt": "2023-08-05T15:00:00.000Z",
+    "price": 25000,
+    "status": "Ongoing",
+    "genre": ["Pop", "Indie", "Dangdut"],
+    "artists": ["Tipe-X", "Lala Widy X Em Berry"],
+    "organizer": "86Production",
+    "location": {
+      "venue": "Taman Padurenan, Bekasi",
+      "address": "Jl. Alun Alun Utara, RT.002/RW.019, Padurenan, Kec. Mustika Jaya, Kota Bks, Jawa Barat",
+      "mapsURL": "https://goo.gl/maps/GM4tWxa9WqJKAVvA9",
+      "province": "Jawa Barat",
+      "city": "Bekasi",
+      "street": "Jl. Alun Alun Utara, RT.002/RW.019, Padurenan, Kec. Mustika Jaya",
+      "postalCode": "16340",
+      "latitude": -6.318582058641635,
+      "longitude": 107.00101072883643
+    }
+  },
+  {
+    "name": "HMGNC 20 Years Concert",
+    "imageUrl": "https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20230726184539_64c10763a181d.jpg",
+    "description": "HMGNC 20 YEARS CONCERT\n\nKonser 20 tahun HMGNC menjadi momentum yang sangat istimewa karena mencerminkan perjalanan musik pop-elektronika Indonesia dari awal 2000-an hingga sekarang. Dulu dikenal sebagai Homogenic, HMGNC telah menjadi pionir dalam musik indie elektronik-pop di Indonesia. Selama dua dekade, mereka telah menghadirkan karya-karya yang inovatif dan menginspirasi, mengukir sejarah musik Indonesia dengan gaya unik mereka. Konser ini akan menjadi perayaan dari kesuksesan dan ketekunan mereka dalam industri musik, serta menjadi penghormatan kepada para penggemar setia yang telah mendukung perjalanan mereka sepanjang waktu.\n\nSelama 20 tahun ini, perjalanan HMGNC tidak hanya mencakup perubahan dari Homogenic menjadi HMGNC, tetapi juga mencerminkan perubahan dalam musik pop-elektronika Indonesia secara keseluruhan. Di konser spesial ini, para penonton akan mengalami sebuah perjalanan emosional melalui evolusi musik dan gaya HMGNC. Mereka akan merasakan nostalgia ketika mendengarkan elemen dari lagu-lagu lama Homogenic yang diolah menjadi sesuatu yang baru dalam karya-karya terbaru HMGNC. Konser ini juga akan menjadi momen untuk merayakan pencapaian besar mereka sebagai musisi dan mengenang momen-momen berharga yang telah mereka ciptakan bersama para penggemar selama dua dekade. Kesempatan untuk menyaksikan perjalanan musik pop-elektronika Indonesia ini tidak boleh dilewatkan, karena HMGNC akan menghadirkan pengalaman yang menakjubkan dan berkesan bagi semua penonton yang hadir",
+    "startedAt": "2023-08-04T11:00:00.000Z",
+    "finishedAt": "2023-08-04T15:00:00.000Z",
+    "price": 100000,
+    "status": "Upcoming",
+    "genre": ["Electronic", "Synth Pop"],
+    "artists": ["HMNGC"],
+    "organizer": "M Bloc",
+    "location": {
+      "venue": "M Bloc Live House",
+      "address": "Panglima Polim St, RT.1/RW.1, Melawai, Kebayoran Baru, Jakarta Selatan, DKI Jakarta",
+      "mapsURL": "https://goo.gl/maps/CCRGe8kZxNuRcd3p7",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Selatan",
+      "street": "Panglima Polim St, RT.1/RW.1, Melawai, Kebayoran Baru",
+      "postalCode": "12160",
+      "latitude": -6.241289366808831,
+      "longitude": 106.79893562698128
+    }
+  },
+  {
+    "name": "DoReMi Fest",
+    "imageUrl": "https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20230415141941_643a500d63282.jpg",
+    "description": "Masih bingung mau ajak gebetan atau keluargamu hangout kemana bulan Agustus nanti? MOHON TENANG! Kami punya solusinya. Ayo ajak teman, keluarga, bestie, pacar, dan semua orang yang kamu kenal buat nonton Konser Musik \"DoReMi Fest\" di Solo bulan Agustus nanti! Konser ini akan diselenggarakan pada hari Sabtu, 05 Agustus 2023 pukul 20.00 WIB, lokasinya di Gedung Djoeang'45 Solo.\n\nYuk kita bersenang-senang mendengarkan alunan musik reggaenisasi khas dari Budi Doremi! Jangan sampai kehabisan tiket ya! Untuk informasi lebih lanjut kalian bisa pantau terus instagram @bitoven.promoter.",
+    "startedAt": "2023-08-05T13:00:00.000Z",
+    "finishedAt": "2023-08-05T15:30:00.000Z",
+    "price": 150000,
+    "status": "Upcoming",
+    "genre": ["Pop"],
+    "artists": ["Budi Doremi"],
+    "organizer": "Esa Hebat Management",
+    "location": {
+      "venue": "Gedung Djoeang'45",
+      "address": "Jl. Kyai Gede, Kedung Lumbu, Kec. Ps. Kliwon, Kota Surakarta, Jawa Tengah",
+      "mapsURL": "https://goo.gl/maps/nBeH8cBhey4j8JFw6",
+      "province": "Jawa Tengah",
+      "city": "Solo",
+      "street": "Jl. Kyai Gede, Kedung Lumbu, Kec. Ps. Kliwon",
+      "postalCode": "57133",
+      "latitude": -7.574441978030339,
+      "longitude": 110.832
+    }
+  },
+  {
+    "name": "SEMESTA BERPESTA - YOGYAKARTA",
+    "imageUrl": "https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20230722162037_64bb9f65116bc.jpg",
+    "description": "Wajib hadir! Semesta Berpesta kembali hadir pada 5-6 Agustus 2023, di Yogyakarta. Perhelatan ini akan berlokasi di Lapangan Kentungan Yonif 403 Yogyakarta dengan berbagai experience yang tidak boleh dilewati. 3 Pilar utama Semesta Berpesta mulai dari musik, kuliner dan fashion siap menyuguhkan hiburan asik bagi para warga Yogyakarta. Beragam kegiatan menarik juga akan memberikan hiburan seru untuk kamu-kamu yang bingung weekend mau ngapain!\n\nEvent dari RAM Entertainment ini akan diwarnai oleh artis-artis seperti Rizky Febian, Raisa Andriana pada hari pertama. Hari kedua panggung Semesta Berpesta akan menghadirkan Kahitna, Yovie Nuno\n\nSelain festival musik, event ini juga memberikan experience lainnya, seperti food truck festival, fashion, costume and cosplay runway dan berbagai kompetisi yang dapat diikuti seperti breakdance competition, karaoke competition, photography competition. Di Semesta Berpesta penonton juga dapat menikmati berbagai spot photo dengan dekorasi yang instagramable di area landmark dan galaxy swings.\n\nUntuk informasi lebih lanjut kunjungi Instagram resmi kami @semestaberpesta untuk mendapatkan informasi terbaru mengenai Semesta Berpesta.",
+    "startedAt": "2023-08-05T03:00:00.000Z",
+    "finishedAt": "2023-08-06T15:00:00.000Z",
+    "price": 75000,
+    "status": "Upcoming",
+    "genre": ["Pop"],
+    "artists": ["Kahitna", "Raisa", "Rizky Febian", "Yovie & Nuno"],
+    "organizer": "RAM Entertainment",
+    "location": {
+      "venue": "Lapangan Kentungan Yonif 403",
+      "address": "Kaliurang St No.29-C, Kentungan, Condongcatur, Depok, Sleman Regency, Special Region of Yogyakarta",
+      "mapsURL": "https://goo.gl/maps/AzVNfBLh4puww4bH6",
+      "province": "DI Yogyakarta",
+      "city": "Sleman",
+      "street": "Kaliurang St No.29-C, Kentungan, Condongcatur, Depok",
+      "postalCode": "55284",
+      "latitude": -7.7502387830799675,
+      "longitude": 110.38885554804035
+    }
+  },
+  {
+    "name": "LIVE AND LOUD",
+    "imageUrl": "https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20230712075218.jpg",
+    "description": "Live and Loud adalah sebuah perayaan 20 tahun Chambers di Makassar. Dimotori oleh Chambers yang hadir sejak tahun 2003 dengan segala pergerakannya di dunia musik, desain, seni, fesyen, serta budaya urban. Kini akan ditampilkan dalam sebuah presentasi event yang melibatkan pelaku dan penggiat dari berbagai kalangan.",
+    "startedAt": "2023-08-05T08:00:00.000Z",
+    "finishedAt": "2023-08-06T15:00:00.000Z",
+    "price": 115000,
+    "status": "Upcoming",
+    "genre": ["Pop", "Koplo", "Metal", "EDM"],
+    "artists": [
+      "Kunto Aji",
+      "Barasuara",
+      "Feel Koplo",
+      "Burgerkill",
+      "Frontxside"
+    ],
+    "organizer": "Rimago Kreasi Cipta",
+    "location": {
+      "venue": "Phinisi Point Parking Lot",
+      "address": "Jl. Metro Tj. Bunga No.2, Panambungan, Kec. Mariso, Kota Makassar, Sulawesi Selatan",
+      "mapsURL": "https://goo.gl/maps/CN3BBYr5VwWbemyX9",
+      "province": "Sulawesi Selatan",
+      "city": "Makassar",
+      "street": "Jl. Metro Tj. Bunga No.2, Panambungan, Kec. Mariso",
+      "postalCode": "90121",
+      "latitude": -5.1515702459741215,
+      "longitude": 119.40423341438044
+    }
+  },
+  {
+    "name": "Asian Sound Syndicate Vol. 2",
+    "imageUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2022/12/14/d4b09831-8f59-44ed-ad67-01452319351d-1671025727953-9fcc425d91061185480cdf39dcb1b64a.jpg",
+    "description": "Asian Sound Syndicate Vol.2 (#Asiansoundsyndicate #ASSVol. 2 #ASS2023 #AsianPride #AsianMusicFestival) memadukan music, art, food and fashion. A platform for people to enjoy, create and inspire. Asian Sound Syndicate Vol. 2 menampilkan berbagai musisi dari Asia yang kami menyebutnya dengan sebutan ‘International Syndicate’ dan ‘Local Syndicate’. Untuk edisi kedua (vol.2) tahun 2023 ini akan menggabungkan aksi panggung dari musisi tanah air dan juga penampilan dari musisi internasional asal Korea, Jepang, Malaysia dst-nya. Tema tahun ini mengusungkan “Tropical ambience” digabungkan dengan pop art colors dan minimalist illustration sebagai konsep acara.",
+    "startedAt": "2023-08-26T07:00:00.000Z",
+    "finishedAt": "2023-08-27T17:00:00.000Z",
+    "price": 575000,
+    "status": "Upcoming",
+    "genre": ["Pop", "Jazz", "Indie", "Rap"],
+    "artists": [
+      "DPR IAN",
+      "iKON",
+      "Lee Youngji",
+      "Sam Kim",
+      "DPR Live"
+    ],
+    "organizer": "Stellar Events",
+    "location": {
+      "venue": "West Parking JIEXPO Kemayoran",
+      "address": "Gunung Sahari Selatan, Kemayoran, RW.10, Pademangan Tim., Kec. Pademangan, Jakarta Pusat, DKI Jakarta",
+      "mapsURL": "https://goo.gl/maps/ZgvPFhfh4jSVXvoP8",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Pusat",
+      "street": "Gunung Sahari Selatan, Kemayoran, RW.10, Pademangan Tim., Kec. Pademangan",
+      "postalCode": "14410",
+      "latitude": -6.146450415863703, 
+      "longitude": 106.84452741089605
+    }
+  },
+  {
+    "name": "GEN P Vol. 1: Kerispatih + Sammy Simorangkir",
+    "imageUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/07/10/7cd20e72-c788-40a1-b865-8c5a334b252d-1688991040806-cd4e7ecca632e14a7ed419bd2a809e15.png",
+    "description": "Yang kamu butuhkan hanyalah PESTA!!! 🎉\n\nKonser yang dihadirkan di tengah hiruk pikuk kegiatan kaum urban sehari-hari, untuk menjadi pelipur lara semua generasi yang membutuhkan pesta.\n\nMenampilkan musisi-musisi Indonesia yang mengajak kamu bernyanyi, bersenang-senang dan berpesta ria bersama. Musisi Indonesia yang tampil akan membawakan lagu-lagu hits mereka serta kolaborasi menarik.\n\nJangan sampai ketinggalan acara ini. KARENA KAMU, BUTUH PESTA!!!🎉🎉🎉",
+    "startedAt": "2023-08-02T13:00:00.000Z",
+    "finishedAt": "2023-08-02T15:00:00.000Z",
+    "price": 650000,
+    "status": "Upcoming",
+    "genre": ["Pop", "Jazz", "Ballad"],
+    "artists": [
+      "Kerispatih",
+      "Sammy Simorangkir"
+    ],
+    "organizer": "KapanLagi Youniverse",
+    "location": {
+      "venue": "Bengkel Space",
+      "address": "Fairgrounds Scbd Lot 14, Jl. Jend. Sudirman Kav 52-53, Rt.5/Rw.3, Senayan, Kec. Kby. Baru, Jakarta Selatan, DKI Jakarta",
+      "mapsURL": "https://goo.gl/maps/RcsB2qr5LUx7Din39",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Selatan",
+      "street": "Fairgrounds Scbd Lot 14, Jl. Jend. Sudirman Kav 52-53, Rt.5/Rw.3, Senayan, Kec. Kby. Baru",
+      "postalCode": "12190",
+      "latitude": -6.226321190744889,
+      "longitude": 106.8069024423271
+    }
+  },
+  {
+    "name": "Gigi - Tour Concert Jogja",
+    "imageUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/05/22/39db82d7-5c2e-4a35-b2fa-e3765ff4bf90-1684726965718-79f71f401419ff69461f4439760db6ce.jpg",
+    "description": "Siap-siap menyaksikan band kawakan, Gigi, dalam konser tur menyambut 30 tahun berkarya di industri musik Indonesia.\n\nArmand Maulana dkk akan menampilkan konsep berbeda dengan tatanan panggung, pencahayaan, dan tata suara yang megah. Beli tiket konser Gigi di tiket.com sekarang dan bernyanyi bersama 25-30 lagu dengan durasi dua jam.",
+    "startedAt": "2023-08-12T12:30:00.000Z",
+    "finishedAt": "2023-08-12T15:30:00.000Z",
+    "price": 300000,
+    "status": "Upcoming",
+    "genre": ["Pop", "Band"],
+    "artists": [
+      "Gigi"
+    ],
+    "organizer": "Neutron Live",
+    "location": {
+      "venue": "UNY Jogja",
+      "address": "Jl. Colombo Yogyakarta No.1, Karang Malang, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta",
+      "mapsURL": "https://goo.gl/maps/8NvGQjqqL6ZoSGpL7",
+      "province": "DI Yogyakarta",
+      "city": "Sleman",
+      "street": "Jl. Colombo Yogyakarta No.1, Karang Malang, Caturtunggal, Kec. Depok",
+      "postalCode": "55281",
+      "latitude": -7.7735641010495895,
+      "longitude": 110.38628328650935
+    }
+  },
+  {
+    "name": "Forestra 2023",
+    "imageUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/06/21/1e3f2cf3-75d6-4ffe-87c9-5a09f482a765-1687328125289-0769d2120b107f711c4e9c83fc259885.jpeg",
+    "description": "Forestra is the first & the biggest forest orchestra in Indonesia by bringing the spirit back to nature presented by tier 1 in the Indonesian performance world, one of which is Jay Subiakto as art director and Erwin Gutawa as music director. Forestra has three elements which are Nature, Music and Human. These are carried in one big concept of CONSERVATION as a form of human recovery from the covid outbreak that previously attacked.",
+    "startedAt": "2023-08-26T07:00:00.000Z",
+    "finishedAt": "2023-08-26T16:00:00.000Z",
+    "price": 180000,
+    "status": "Upcoming",
+    "genre": ["Indie", "Jazz", "EDM", "Pop"],
+    "artists": [
+      "Erwin Gutawa",
+      "Barasuara",
+      "David Bayu",
+      "Rahmania Astrini",
+      "Feel Koplo"
+    ],
+    "organizer": "Forest Orchestra",
+    "location": {
+      "venue": "Orchid Forest Cikole",
+      "address": "Genteng, Cikole, Kec. Lembang, Kabupaten Bandung Barat, Jawa Barat",
+      "mapsURL": "https://goo.gl/maps/FveF9grbvpqeGaDj9",
+      "province": "Jawa Barat",
+      "city": "Bandung",
+      "street": "Genteng, Cikole, Kec. Lembang",
+      "postalCode": "40391",
+      "latitude": -6.779342039655453, 
+      "longitude": 107.63713116265761
+    }
+  },
+  {
+    "name": "Summer House Festival",
+    "imageUrl": "https://s-light.tiket.photos/t/01E25EBZS3W0FY9GTG6C42E1SE/rsfit19201280gsm/events/2023/07/12/85428bd0-94dd-4820-9946-4bb9341561ca-1689140102851-ddd63ed8c0c14da6f58d4b7c69d575d4.jpeg",
+    "description": "FESTIVAL MUSIK TERBESAR SE-JAWA TIMUR TAHUN 2024!\n\nSounds of Downtown (SoD) adalah sebuah festival musik kolaboratif yang diselenggarakan oleh PT. Serikat Orang Dalam, sebuah perusahaan yang berfokus pada musik, hiburan, dan industri kreatif lainnya.\n\nAcara ini akan diselenggarakan pada Sabtu & Minggu, 5-6 Agustus 2022 di Lapangan Bhumi Marinir Sutedi Senaputra Karang Pilang, Surabaya, dengan menampilkan musisi ternama tanah air, mulai dari D’Masiv, Armada, Yura, Nadin Amizah, dan banyak lagi yang akan segera diumumkan!\n\nBeli tiketnya eksklusif hanya di tiket.com!",
+    "startedAt": "2023-08-18T08:00:00.000Z",
+    "finishedAt": "2023-08-20T18:30:00.000Z",
+    "price": 599000,
+    "status": "Upcoming",
+    "genre": ["EDM", "Electronic"],
+    "artists": [
+      "Axwell & Ingrosso",
+      "Weird Genius",
+      "Lost Frequencies",
+      "Dipha Barus",
+      "Yasmin",
+      "Orjan Nilsen",
+      "Danny Avila",
+      "Winky Wiryawan",
+      "Mandy",
+      "Nerno"
+    ],
+    "organizer": "ab Entertainment",
+    "location": {
+      "venue": "Carnaval Ancol",
+      "address": "Jl. Pantai Karnaval Ancol, Ancol, Kec. Pademangan, Jakarta Utara, DKI Jakarta",
+      "mapsURL": "https://goo.gl/maps/zaKuHVTjCskhicNf7",
+      "province": "DKI Jakarta",
+      "city": "Jakarta Utara",
+      "street": "Jl. Pantai Karnaval Ancol, Ancol, Kec. Pademangan",
+      "postalCode": "14430",
+      "latitude": -6.116181507553707, 
+      "longitude": 106.85730714232709
     }
   }
 ]

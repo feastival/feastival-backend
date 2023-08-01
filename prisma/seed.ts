@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'fs/promises';
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -54,11 +55,12 @@ async function upsertData(data) {
                     // If organizer is not found, create a new user and connect it
                     const organizerName = eventData.organizer as string;
                     const email = `${organizerName.toLowerCase().replace(/ /g, '')}@festival.fun`;
+                    const password = await bcrypt.hash('password', parseInt(process.env.BCRYPT_SALT_ROUND))
 
                     const newOrganizer = await prisma.user.upsert({
                         where: { email }, // Use email as the unique identifier
                         update: {}, // No need to update anything
-                        create: { id: uuidv4(), email, username: organizerName, password: 'password' },
+                        create: { id: uuidv4(), email, username: organizerName, password },
                     });
                     organizerConnect = { connect: { id: newOrganizer.id } };
                 }
