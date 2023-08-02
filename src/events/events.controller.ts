@@ -101,12 +101,12 @@ export class EventsController {
     return new EventEntity(updatedEvent);
   }
 
-  // @Delete(':id')
-  // @UseGuards(JwtAuthGuard, AdminGuard)
-  // @ApiBearerAuth()
-  // @ApiOkResponse({ type: EventEntity })
-  // async remove(@Param('id') id: string) {
-  //   const deletedEvent = await this.eventsService.remove(id);
-  //   return new EventEntity(deletedEvent);
-  // }
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  @ApiBearerAuth()
+  @ApiOkResponse({ type: EventEntity })
+  async remove(@Param('id') id: string) {
+    const deletedEvent = await this.eventsService.remove(id);
+    return new EventEntity(deletedEvent);
+  }
 }
