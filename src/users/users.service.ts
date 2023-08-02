@@ -80,6 +80,11 @@ export class UsersService {
     const user = await this.prisma.user.findUnique({
       where: { id },
       include: {
+        role: {
+          select: {
+            name: true,
+          },
+        },
         trackedEvents: {
           include: {
             location: true,
@@ -94,7 +99,6 @@ export class UsersService {
           },
         },
         createdEvents: true,
-        role: true,
       },
     });
 
@@ -102,7 +106,8 @@ export class UsersService {
       throw new NotFoundException(`User with id: ${id} does not exist.`);
     }
 
-    return { ...user, role: user.role.name };
+    //return { ...user, role: user.role.name };
+    return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
@@ -252,5 +257,11 @@ export class UsersService {
       throw new Error(`Status "${role}" is not found`);
     }
     return role.id;
+  }
+
+  private formatCoordinate(coordinate): number {
+    // Convert the Decimal to a standard number using the Decimal.toString() method
+    const coordinateString = coordinate.toString();
+    return parseFloat(coordinateString);
   }
 }

@@ -65,6 +65,11 @@ export class EventsService {
       status: newEvent.status.name,
       artists: newEvent.artists.map((artist) => artist.name),
       genre: newEvent.genre.map((genre) => genre.name),
+      location: {
+        ...newEvent.location,
+        latitude: this.formatCoordinate(newEvent.location.latitude),
+        longitude: this.formatCoordinate(newEvent.location.longitude),
+      },
     };
   }
 
@@ -130,9 +135,8 @@ export class EventsService {
               }
             : {},
         ],
-        
       },
-      
+
       include: {
         status: true,
         artists: true,
@@ -155,6 +159,11 @@ export class EventsService {
         status: event.status.name,
         artists: event.artists.map((artist) => artist.name),
         genre: event.genre.map((genre) => genre.name),
+        location: {
+          ...event.location,
+          latitude: this.formatCoordinate(event.location.latitude),
+          longitude: this.formatCoordinate(event.location.longitude),
+        },
       };
     });
   }
@@ -187,6 +196,11 @@ export class EventsService {
       status: event.status.name,
       artists: event.artists.map((artist) => artist.name),
       genre: event.genre.map((genre) => genre.name),
+      location: {
+        ...event.location,
+        latitude: this.formatCoordinate(event.location.latitude),
+        longitude: this.formatCoordinate(event.location.longitude),
+      },
     };
   }
 
@@ -273,6 +287,11 @@ export class EventsService {
       status: updatedEvent.status.name,
       artists: updatedEvent.artists.map((artist) => artist.name),
       genre: updatedEvent.genre.map((genre) => genre.name),
+      location: {
+        ...updatedEvent.location,
+        latitude: this.formatCoordinate(updatedEvent.location.latitude),
+        longitude: this.formatCoordinate(updatedEvent.location.longitude),
+      },
     };
   }
 
@@ -301,5 +320,11 @@ export class EventsService {
       throw new Error(`Status "${status}" is not found`);
     }
     return status.id;
+  }
+
+  private formatCoordinate(coordinate): number {
+    // Convert the Decimal to a standard number using the Decimal.toString() method
+    const coordinateString = coordinate.toString();
+    return parseFloat(coordinateString);
   }
 }

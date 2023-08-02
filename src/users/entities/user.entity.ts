@@ -23,7 +23,7 @@ export class UserEntity {
   // role: RoleEntity;
 
   @ApiProperty()
-  role?: string;
+  role?: object;
   // role: RoleEntity;
 
   @ApiProperty()
