@@ -80,7 +80,19 @@ export class UsersService {
     const user = await this.prisma.user.findUnique({
       where: { id },
       include: {
-        trackedEvents: true,
+        trackedEvents: {
+          include: {
+            location: true,
+            organizer: {
+              select: {
+                id: true,
+                email: true,
+                username: true,
+                imageUrl: true,
+              },
+            },
+          },
+        },
         createdEvents: true,
         role: true,
       },
@@ -125,7 +137,10 @@ export class UsersService {
     }
   }
 
-  async updatePartial(id: string, updatePartialUserDto: UpdatePartialUserDto): Promise<UserEntity> {
+  async updatePartial(
+    id: string,
+    updatePartialUserDto: UpdatePartialUserDto,
+  ): Promise<UserEntity> {
     // Fetch the user to check if it exists
     const user = await this.prisma.user.findUnique({ where: { id } });
     if (!user) {
@@ -202,9 +217,8 @@ export class UsersService {
             connect: { id: eventId },
           },
         },
-        select: {
+        include: {
           trackedEvents: true,
-          createdEvents: true,
         },
       });
       return updatedUser;

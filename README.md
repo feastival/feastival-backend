@@ -1,3 +1,13 @@
+# Feastival API
+
+## Next to do
+
+1. pagination (events)
+2. get all events sort by startedAt
+3. filter events by status
+4. filter artists by name
+5. guard-organizer
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
