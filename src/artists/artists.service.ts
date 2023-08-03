@@ -23,7 +23,12 @@ export class ArtistsService {
         id: id,
       },
       include: {
-        events: true,
+        events: {
+          include: {
+            location: true,
+            status: true,
+          },
+        },
       },
     });
 
