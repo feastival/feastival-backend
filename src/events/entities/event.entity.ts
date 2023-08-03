@@ -32,7 +32,7 @@ export class EventEntity {
   genre?: Array<string>;
 
   @ApiProperty()
-  artists?: Array<string>;
+  artists?: Array<object>;
 
   @ApiProperty()
   location: Object;
