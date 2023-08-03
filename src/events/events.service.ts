@@ -63,7 +63,6 @@ export class EventsService {
     return {
       ...newEvent,
       status: newEvent.status.name,
-      artists: newEvent.artists.map((artist) => artist.name),
       genre: newEvent.genre.map((genre) => genre.name),
       location: {
         ...newEvent.location,
@@ -92,6 +91,14 @@ export class EventsService {
             OR: [
               {
                 location: {
+                  province: {
+                    contains: location,
+                    mode: 'insensitive',
+                  },
+                },
+              },
+              {
+                location: {
                   city: {
                     contains: location,
                     mode: 'insensitive',
@@ -108,7 +115,7 @@ export class EventsService {
               },
               {
                 location: {
-                  street: {
+                  address: {
                     contains: location,
                     mode: 'insensitive',
                   },
@@ -157,7 +164,6 @@ export class EventsService {
       return {
         ...event,
         status: event.status.name,
-        artists: event.artists.map((artist) => artist.name),
         genre: event.genre.map((genre) => genre.name),
         location: {
           ...event.location,
@@ -194,7 +200,6 @@ export class EventsService {
     return {
       ...event,
       status: event.status.name,
-      artists: event.artists.map((artist) => artist.name),
       genre: event.genre.map((genre) => genre.name),
       location: {
         ...event.location,
@@ -224,7 +229,7 @@ export class EventsService {
     const { status, artists, ...eventData } = updateEventDto;
 
     let updateArtists = {};
-    if (updateEventDto.genre?.length !== 0) {
+    if (updateEventDto.artists?.length !== 0) {
       updateArtists = {
         set: [],
         connectOrCreate: updateEventDto.artists?.map((artistName) => ({
@@ -285,7 +290,6 @@ export class EventsService {
     return {
       ...updatedEvent,
       status: updatedEvent.status.name,
-      artists: updatedEvent.artists.map((artist) => artist.name),
       genre: updatedEvent.genre.map((genre) => genre.name),
       location: {
         ...updatedEvent.location,
